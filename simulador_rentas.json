@@ -1,0 +1,1310 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "v1",
+    "title": "ApiSimuladorRentasNSI"
+  },
+  "host": "xrmdes:8026",
+  "basePath": "/Api/MotorCalculo/Simulador/Rentas",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/v1/SoloRentablidad/{producto}/{prima}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasFinancieras"
+        ],
+        "summary": "Método para calcular la renta mensual de renta financiera sólo rentabilidad",
+        "operationId": "SimuladorRentasFinancieras_SimularRentaFinancieraSoloRentabilidad",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto origen",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PPA",
+              "PPA1",
+              "PSPP",
+              "PSPT",
+              "PUJA",
+              "SAF",
+              "SAF1"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/ImporteDefinido/{producto}/{prima}/{renta}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasFinancieras"
+        ],
+        "summary": "Método para calcular la fecha de finalización de una renta financiera de importe definido",
+        "operationId": "SimuladorRentasFinancieras_SimularRentaFinancieraImporteDefinido",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto origen",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PPA",
+              "PPA1",
+              "PSPP",
+              "PSPT",
+              "PUJA",
+              "SAF",
+              "SAF1"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "renta",
+            "in": "path",
+            "description": "Renta deseada (Renta &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Temporal/{producto}/{prima}/{meses}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasFinancieras"
+        ],
+        "summary": "Método para calcular la renta mensual de renta financiera temporal",
+        "operationId": "SimuladorRentasFinancieras_SimularRentaFinancieraTemporal",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto origen",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PPA",
+              "PPA1",
+              "PSPP",
+              "PSPT",
+              "PUJA",
+              "SAF",
+              "SAF1"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "meses",
+            "in": "path",
+            "description": "Meses de duración de renta. (Meses &gt; 0)",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad1/{producto}/{prima}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 1",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad2/{producto}/{prima}/{pc}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 2",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "pc",
+            "in": "path",
+            "description": "Peridodo de cobro cierto en años (pc &gt; 0)",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad3/{producto}/{prima}/{sexo}/{sexoReversion}/{porceReversion}/{fechaNacimiento}/{fechaNacimientoReversion}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 3",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad3",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "sexoReversion",
+            "in": "path",
+            "description": "Sexo del beneficiario de la reversión, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "porceReversion",
+            "in": "path",
+            "description": "Porcentage de reversión (ejemplo 70)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaNacimientoReversion",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario de la reversión. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad4/{producto}/{prima}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 4",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad4",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad5/{producto}/{prima}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 5",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad5",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/Modalidad6/{prima}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcular la renta mensual y renta mensual garantizada de una Modalidad 6 (Solo producto RP65)",
+        "operationId": "SimuladorRentasVitalicias_SimularModalidad6",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionRentasVitalicias"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/CapitalizarRVRModalidad1/{producto}/{renta}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para capitalizar una renta Modalidad 1",
+        "operationId": "SimuladorRentasVitalicias_CapitalizarRVRModalidad1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "renta",
+            "in": "path",
+            "description": "Renta actual (Renta &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/CapitalizarRVRModalidad2/{producto}/{renta}/{fechaEfecto}/{fechaFinPeriodoCierto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para capitalizar una renta Modalidad 2",
+        "operationId": "SimuladorRentasVitalicias_CapitalizarRVRModalidad2",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "renta",
+            "in": "path",
+            "description": "Renta actual (Renta &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "fechaFinPeriodoCierto",
+            "in": "path",
+            "description": "Fecha cuando finaliza el periodo cierto. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/SimularParticipacionBeneficios/{modalidad}/{prima}/{renta}/{rentaMinima}/{sexo}/{fechaNacimiento}/{fechaEfecto}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "operationId": "SimuladorRentasVitalicias_SimularParticipacionBeneficiosModalidad1",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "modalidad",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Modalidad_1",
+              "Modalidad_5",
+              "Modaldiad_6"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "renta",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "rentaMinima",
+            "in": "path",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    },
+    "/v1/SimularContratacionRVRModalidad1/{producto}/{prima}/{sexo}/{fechaNacimiento}/{fechaEfecto}/{fechaUltimaCartera}": {
+      "get": {
+        "tags": [
+          "SimuladorRentasVitalicias"
+        ],
+        "summary": "Método para calcularla renta modalidad 1 de una fecha de efecto dada, si la fecha es retroactiva nos devuelve las rentas anteriores.",
+        "operationId": "SimuladorRentasVitalicias_SimularRentaVitaliciaModalidad1ParaContratacion",
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "producto",
+            "in": "path",
+            "description": "Producto: Si es forma de cobro del PUA pasar PUA, si es Renta Vitalica Remunerada pasar RVR, y si es Renta Patrimonio pasar RP65",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "PUA",
+              "RVR",
+              "RP65"
+            ]
+          },
+          {
+            "name": "prima",
+            "in": "path",
+            "description": "Prima de constitución de la renta (Prima &gt; 0)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "sexo",
+            "in": "path",
+            "description": "Sexo del beneficiario, H: para hombre y M para mujer",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "H",
+              "M"
+            ]
+          },
+          {
+            "name": "fechaNacimiento",
+            "in": "path",
+            "description": "Fecha de nacimiento del beneficiario. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaEfecto",
+            "in": "path",
+            "description": "Fecha de comienzo de la renta. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "fechaUltimaCartera",
+            "in": "path",
+            "description": "Fecha de última cartera de prestaciones. (yyyy-mm-dd)",
+            "required": true,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ResultadoSimulacionContratacionRVR"
+            }
+          },
+          "400": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/BadRequestErrorMessageResult"
+            }
+          },
+          "500": {
+            "description": "Se ha producido un error en SimuladorRentasFinancierasV1Controller"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "BadRequestErrorMessageResult": {
+      "type": "object",
+      "properties": {
+        "Message": {
+          "type": "string",
+          "readOnly": true
+        },
+        "ContentNegotiator": {
+          "$ref": "#/definitions/IContentNegotiator",
+          "readOnly": true
+        },
+        "Request": {
+          "type": "object",
+          "readOnly": true
+        },
+        "Formatters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeFormatter"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "IContentNegotiator": {
+      "type": "object",
+      "properties": {}
+    },
+    "MediaTypeFormatter": {
+      "type": "object",
+      "properties": {
+        "SupportedMediaTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeHeaderValue"
+          },
+          "readOnly": true
+        },
+        "SupportedEncodings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Encoding"
+          },
+          "readOnly": true
+        },
+        "MediaTypeMappings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MediaTypeMapping"
+          },
+          "readOnly": true
+        },
+        "RequiredMemberSelector": {
+          "$ref": "#/definitions/IRequiredMemberSelector"
+        }
+      }
+    },
+    "MediaTypeHeaderValue": {
+      "type": "object",
+      "properties": {
+        "CharSet": {
+          "type": "string"
+        },
+        "Parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NameValueHeaderValue"
+          },
+          "readOnly": true
+        },
+        "MediaType": {
+          "type": "string"
+        }
+      }
+    },
+    "Encoding": {
+      "type": "object",
+      "properties": {
+        "m_codePage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "dataItem": {
+          "$ref": "#/definitions/CodePageDataItem"
+        },
+        "m_isReadOnly": {
+          "type": "boolean"
+        },
+        "encoderFallback": {
+          "$ref": "#/definitions/EncoderFallback"
+        },
+        "decoderFallback": {
+          "$ref": "#/definitions/DecoderFallback"
+        }
+      }
+    },
+    "MediaTypeMapping": {
+      "type": "object",
+      "properties": {
+        "MediaType": {
+          "$ref": "#/definitions/MediaTypeHeaderValue",
+          "readOnly": true
+        }
+      }
+    },
+    "IRequiredMemberSelector": {
+      "type": "object",
+      "properties": {}
+    },
+    "NameValueHeaderValue": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "Value": {
+          "type": "string"
+        }
+      }
+    },
+    "CodePageDataItem": {
+      "type": "object",
+      "properties": {
+        "m_dataIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "m_uiFamilyCodePage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "m_webName": {
+          "type": "string"
+        },
+        "m_headerName": {
+          "type": "string"
+        },
+        "m_bodyName": {
+          "type": "string"
+        },
+        "m_flags": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "EncoderFallback": {
+      "type": "object",
+      "properties": {
+        "bIsMicrosoftBestFitFallback": {
+          "type": "boolean"
+        }
+      }
+    },
+    "DecoderFallback": {
+      "type": "object",
+      "properties": {
+        "bIsMicrosoftBestFitFallback": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ResultadoSimulacionRentasVitalicias": {
+      "description": "Clase con los resultados de la simulación de rentas vitalicias",
+      "type": "object",
+      "properties": {
+        "Renta": {
+          "format": "double",
+          "description": "Renta resultante",
+          "type": "number"
+        },
+        "RentaGarantizada": {
+          "format": "double",
+          "description": "Renta garantizada resultante",
+          "type": "number"
+        }
+      }
+    },
+    "ResultadoSimulacionContratacionRVR": {
+      "description": "Clase con los resultados de la simulación de contratación de rentas vitalicias",
+      "type": "object",
+      "properties": {
+        "Renta": {
+          "format": "double",
+          "description": "Renta resultante",
+          "type": "number"
+        },
+        "RentaGarantizada": {
+          "format": "double",
+          "description": "Renta garantizada resultante",
+          "type": "number"
+        },
+        "Fecha": {
+          "format": "date-time",
+          "description": "Fecha ultima renta",
+          "type": "string"
+        },
+        "Atrasos": {
+          "description": "Rentas atrasadas a pagar",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResultadoRentaInterno"
+          }
+        }
+      }
+    },
+    "ResultadoRentaInterno": {
+      "description": "Clase interna para guardar los datos de los atrasos",
+      "type": "object",
+      "properties": {
+        "Renta": {
+          "format": "double",
+          "description": "Renta del atraso",
+          "type": "number"
+        },
+        "Fecha": {
+          "format": "date-time",
+          "description": "Fecha del atraso",
+          "type": "string"
+        }
+      }
+    }
+  }
+}
